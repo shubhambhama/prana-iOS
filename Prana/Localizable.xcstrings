@@ -1,0 +1,150 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld" : {
+
+    },
+    "4-7-8 Breathing" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4-7-8 श्वास"
+          }
+        }
+      }
+    },
+    "4-7-8 Breathing promotes better sleep" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4-7-8 श्वास बेहतर नींद को बढ़ावा देता है"
+          }
+        }
+      }
+    },
+    "Box Breathing" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बॉक्स श्वास"
+          }
+        }
+      }
+    },
+    "Box Breathing is a powerful stress reliever." : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "बॉक्स ब्रीदिंग एक शक्तिशाली तनाव निवारक है।"
+          }
+        }
+      }
+    },
+    "Breath Cycles" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "श्वास साइकिल"
+          }
+        }
+      }
+    },
+    "Breath Holding" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सांस रोकें"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रद्द"
+          }
+        }
+      }
+    },
+    "Change Duration" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अवधि बदलें"
+          }
+        }
+      }
+    },
+    "Cycle" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "साइकिल"
+          }
+        }
+      }
+    },
+    "Equal Breathing" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "समान श्वास"
+          }
+        }
+      }
+    },
+    "Equal Breathing helps you to relax and focus." : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "समान श्वास आपको आराम करने और ध्यान केंद्रित करने में मदद करती है।"
+          }
+        }
+      }
+    },
+    "Hello" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "नमस्ते!"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सेव"
+          }
+        }
+      }
+    },
+    "Test your breath-holding capacity" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "अपनी सांस रोकने की क्षमता का परीक्षण करें"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

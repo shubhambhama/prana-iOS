@@ -11,7 +11,8 @@ import SwiftUI
 struct PranaApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environment(\.locale, Locale(identifier: "hi"))
         }
     }
 }
