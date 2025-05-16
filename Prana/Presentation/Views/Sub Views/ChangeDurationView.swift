@@ -98,15 +98,16 @@ struct ChangeDurationCircleProgress: View {
                         HStack {
                             Text("\(Int(progress))")
                                 .font(.system(size: radius * 0.6, weight: .bold, design:.rounded))
-                            Text("Cycle")
+                            Text(progress >= 2 ? "Cycles" : "Cycle")
                                 .font(.system(size: radius * 0.18, design:.rounded))
+                            
                         }
                     }
-                //                    Circle()
-                //                        .stroke(Color(hue: 0.0, saturation: 0.0, brightness: 0.6),
-                //                                style: StrokeStyle(lineWidth: sliderWidth * 0.75,
-                //                                                   dash: [2, (2 * .pi * radius)/24 - 2]))
-                //                        .rotationEffect(Angle(degrees: -90))
+                Circle()
+                    .stroke(Color(hue: 0.0, saturation: 0.0, brightness: 0.6),
+                            style: StrokeStyle(lineWidth: sliderWidth * 0.75,
+                                               dash: [2, (2 * .pi * radius)/24 - 2]))
+                    .rotationEffect(Angle(degrees: -90))
                 Circle()
                     .trim(from: 0, to: progressFraction)
                     .stroke(Color(hue: 0.0, saturation: 0.5, brightness: 0.9),

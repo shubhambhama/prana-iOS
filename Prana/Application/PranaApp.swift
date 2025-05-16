@@ -12,7 +12,7 @@ struct PranaApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environment(\.locale, Locale(identifier: "hi"))
+                .environment(\.locale, Locale(identifier: "en"))
         }
     }
 }

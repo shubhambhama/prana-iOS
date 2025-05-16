@@ -94,6 +94,16 @@
         }
       }
     },
+    "Cycles" : {
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "साइकिल"
+          }
+        }
+      }
+    },
     "Equal Breathing" : {
       "localizations" : {
         "hi" : {
