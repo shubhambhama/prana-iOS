@@ -31,6 +31,7 @@ struct HomePageCards: View {
         .padding(EdgeInsets.init(top: 0, leading: 16, bottom: 0, trailing: 16))
         .onAppear {
             viewModel.getHomePageData()
+            viewModel.fetchHomePageQuotesFromOpenAI()
         }
     }
 }

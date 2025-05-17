@@ -16,11 +16,18 @@ struct MainView: View {
                 HomePageBackgroundView()
                 VStack(alignment: .leading) {
                     TypeWriterView(fullText: "Hello", typingSpeed: 0.1)
+                    Text(viewModel.outputLabel)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 16)
                     Spacer()
                     HomePageCards(viewModel: viewModel)
                     Spacer()
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
+                .frame(
+                    width: geometry.size.width,
+                    height: geometry.size.height,
+                    alignment: .top
+                )
             }
         }
     }
