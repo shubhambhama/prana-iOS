@@ -18,7 +18,7 @@ struct MainView: View {
                     HomePageBackgroundView()
                     VStack(alignment: .leading) {
                         TypeWriterView(fullText: "Hello", typingSpeed: 0.1)
-                        Text(viewModel.outputLabel)
+                        Text(viewModel.homePageLabel)
                             .foregroundColor(.white)
                             .padding(.horizontal, 16)
                         Spacer()
@@ -36,15 +36,5 @@ struct MainView: View {
             }
         }
     }
-}
-
-#Preview("English") {
-//    MainView()
-//        .environment(\.locale, Locale(identifier: "en"))
-}
-
-#Preview("Hindi") {
-//    MainView()
-//        .environment(\.locale, Locale(identifier: "hi"))
 }
 

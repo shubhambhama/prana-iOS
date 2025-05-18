@@ -9,26 +9,34 @@ import Foundation
 
 protocol HomePageViewModelProtocol: ObservableObject {
     func getHomePageData()
-    func fetchHomePageQuotesFromOpenAI() async
+    func fetchDataFromOpenAI(userPrompt: String, updateLabel: @escaping (String) -> Void) async
 }
 
 final class HomePageViewModel: HomePageViewModelProtocol {
     @Published var homePageData: [HomePageCardModel] = .init()
     @Published var isLoading = false
     @Published var errorMessage: String?
+    @Published var homePageLabel = ""
+    @Published var homePageInfo = ""
+    @Published var isInfoSheetExpanded: Bool = false
     
-    @Published var outputLabel = ""
+    let apiKey = "sk-proj-<OPEN_AI_KEY>"
     
-        let apiKey = "sk-proj-<OPEN_AI_KEY>"
     
-//    let apiKey = ""
+    let systemPrompt = "You are an assistant who has deep knowledge about meditation and breathing techiniques. "
+    let homepageQuotePrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. Give me one quote for today to do use these breathing techiniques to reduce stress and anxiety. Make sure this is maximum 21 words long. Also, make sure to add try this breathing technique to reduce stress and anxiety."
     
-    let systemPrompt = "You are an assistant who has deep knowledge about meditation and breathing techiniques."
-    let userInput = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. Give me one quote for today to do use these breathing techiniques to reduce stress and anxiety. Make sure this is maximum 21 words long. Also, make sure to add try this breathing technique to reduce stress and anxiety."
+    let homepageInfoPrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. In that, I have completed 7 equal breathing, 8 box breathing, 2 4-7-8 breathing and 24 breath holding. Can you give me insight like how this is improving my health and motivate me to do more. Make sure this is maximum 100 words long."
     
     init() {
         getHomePageData()
-        fetchHomePageQuotesFromOpenAI()
+        fetchDataFromOpenAI(userPrompt: homepageQuotePrompt) { info in
+            self.homePageLabel = info
+        }
+        fetchDataFromOpenAI(userPrompt: homepageInfoPrompt) { info in
+            self.homePageInfo = info
+            self.isInfoSheetExpanded.toggle()
+        }
     }
 }
 
@@ -71,7 +79,7 @@ extension HomePageViewModel {
         
     }
     
-    func fetchHomePageQuotesFromOpenAI() {
+    func fetchDataFromOpenAI(userPrompt: String, updateLabel: @escaping (String) -> Void) {
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -82,7 +90,7 @@ extension HomePageViewModel {
             model: "gpt-4o-mini",
             messages: [
                 ChatMessage(role: "system", content: systemPrompt),
-                ChatMessage(role: "user", content: userInput)
+                ChatMessage(role: "user", content: userPrompt)
             ],
             temperature: 1,
         )
@@ -105,7 +113,8 @@ extension HomePageViewModel {
                    var content = message["content"] as? String {
                     DispatchQueue.main.async {
                         content = content.replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: "\n", with: "")
-                        self.outputLabel = content
+                        updateLabel(content)
+//                        outputLabel = content
                     }
                 }
             }
