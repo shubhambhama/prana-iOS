@@ -26,7 +26,7 @@ final class HomePageViewModel: HomePageViewModelProtocol {
     let systemPrompt = "You are an assistant who has deep knowledge about meditation and breathing techiniques. "
     let homepageQuotePrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. Give me one quote for today to do use these breathing techiniques to reduce stress and anxiety. Make sure this is maximum 21 words long. Also, make sure to add try this breathing technique to reduce stress and anxiety."
     
-    let homepageInfoPrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. In that, I have completed 7 equal breathing, 8 box breathing, 2 4-7-8 breathing and 24 breath holding. Can you give me insight like how this is improving my health and motivate me to do more. Make sure this is maximum 100 words long."
+    let homepageInfoPrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. In that, I have completed seven equal breathing, eight box breathing, two 4-7-8 breathing and 24 breath holding. Can you give me insight like how this is improving my health and motivate me to do more. Make sure this is maximum 100 words long."
     
     init() {
         getHomePageData()

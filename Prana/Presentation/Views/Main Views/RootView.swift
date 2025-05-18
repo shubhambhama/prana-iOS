@@ -17,12 +17,12 @@ struct RootView: View {
                 .navigationDestination(item: $selectedTarget) { target in
                     switch target {
                     case .breath:
-                        BreathView(metaData: "")
+                        BreathePractiseView()
                     }
                 }
             
                 .sheet(isPresented: $viewModel.isInfoSheetExpanded) {
-                    BreathView(metaData: viewModel.homePageInfo).presentationDetents([.fraction(0.9)])
+                    BreathingInfoView(metaData: viewModel.homePageInfo).presentationDetents([.fraction(0.9)])
                 }
         }
         .environment(\.locale, Locale(identifier: "en"))

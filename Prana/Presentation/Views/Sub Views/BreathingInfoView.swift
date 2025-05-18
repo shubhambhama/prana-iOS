@@ -8,11 +8,28 @@
 import SwiftUI
 
 struct BreathingInfoView: View {
+    let metaData: String
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading) {
+            Text("Your Breathing Journey So Far")
+                .font(.title2)
+                .padding(16)
+                .fontWeight(.bold)
+            
+            Image("breathing_image")
+                .resizable()
+                .scaledToFit()
+                .frame(maxWidth: .infinity)
+                .clipped()
+            
+            Text(metaData)
+                .font(.subheadline)
+                .padding(16)
+        }
     }
 }
 
 #Preview {
-    BreathingInfoView()
+    BreathingInfoView(metaData: "")
 }
