@@ -19,9 +19,17 @@ final class HomePageViewModel: HomePageViewModelProtocol {
     
     @Published var outputLabel = ""
     
-    let apiKey = "sk-proj-<OPEN_AI_API_KEY>"
-    let systemPrompt = "You are an assistant who is deep knowledge about meditation and breathing techinique."
-    let userInput = "Give me one quote for today related to breathing and meditation. Make sure this is maxmum 21 words long."
+        let apiKey = "sk-proj-<OPEN_AI_KEY>"
+    
+//    let apiKey = ""
+    
+    let systemPrompt = "You are an assistant who has deep knowledge about meditation and breathing techiniques."
+    let userInput = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. Give me one quote for today to do use these breathing techiniques to reduce stress and anxiety. Make sure this is maximum 21 words long. Also, make sure to add try this breathing technique to reduce stress and anxiety."
+    
+    init() {
+        getHomePageData()
+        fetchHomePageQuotesFromOpenAI()
+    }
 }
 
 extension HomePageViewModel {
@@ -82,13 +90,13 @@ extension HomePageViewModel {
         request.httpBody = try? JSONEncoder().encode(requestBody)
         
         let session = URLSession(configuration: .ephemeral)
-
+        
         let task = session.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 print(error ?? "Unknown error")
                 return
             }
-
+            
             if let response = response as? HTTPURLResponse, response.statusCode == 200 {
                 if let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                    let choices = json["choices"] as? [[String: Any]],

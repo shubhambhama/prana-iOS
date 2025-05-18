@@ -11,17 +11,25 @@ struct HomePageBackgroundView: View {
     @State private var animate = false
 
     var body: some View {
-        LinearGradient(
-            gradient: Gradient(
-                colors: animate ? [.blue,.purple,.mint]:[.mint,.purple,.blue]),
+        let animatedGradient = LinearGradient(
+            gradient: Gradient(colors: animate ? [.blue, .purple, .mint] : [.mint, .purple, .blue]),
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
-        .animation(.easeOut(duration: 5).repeatForever(autoreverses: true), value: animate)
-        .onAppear { animate = true }
-        .ignoresSafeArea()
+
+        animatedGradient
+            .animation(nil, value: animate)
+            .ignoresSafeArea()
+            .onAppear {
+                DispatchQueue.main.async {
+                    withAnimation(.easeInOut(duration: 5).repeatForever(autoreverses: true)) {
+                        animate.toggle()
+                    }
+                }
+            }
     }
 }
+
 
 
 #Preview {

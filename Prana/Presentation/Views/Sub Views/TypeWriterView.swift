@@ -10,10 +10,13 @@ struct TypeWriterView: View {
     var fullText: String
     @State private var currentText: String = ""
     let typingSpeed: Double
+    @State private var hasAnimated = false
 
     var body: some View {
         Text(currentText)
             .onAppear {
+                guard !hasAnimated else { return }
+                hasAnimated = true
                 currentText = ""
                 let localizedText = NSLocalizedString(fullText, comment: "")
                 let characters = Array(localizedText)

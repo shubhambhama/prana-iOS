@@ -135,6 +135,9 @@
         }
       }
     },
+    "Hello, World!" : {
+
+    },
     "Save" : {
       "localizations" : {
         "hi" : {
