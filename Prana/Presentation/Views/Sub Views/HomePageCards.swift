@@ -73,7 +73,7 @@ struct CardView: View {
             onCardTap(item.homeCardType.parameters.inhale, item.homeCardType.parameters.inhaleHold, item.homeCardType.parameters.exhale, item.homeCardType.parameters.exhaleHold)
         }
         .sheet(isPresented: $isExpanded) {
-            ChangeDurationView().presentationDetents([.fraction(0.54)])
+            ChangeDurationView(cardType: item.homeCardType).presentationDetents([.fraction(0.54)])
         }
     }
 }

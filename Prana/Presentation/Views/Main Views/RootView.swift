@@ -18,6 +18,7 @@ struct RootView: View {
                     switch target {
                     case .breath(let inhale, let inhaleHold, let exhale, let exhaleHold):
                         BreathePractiseView(inhaleDuration: inhale, inhaleHoldDuration: inhaleHold, exhaleDuration: exhale, exhaleHoldDuration: exhaleHold)
+                    case .support: SupportView()
                     }
                 }
             

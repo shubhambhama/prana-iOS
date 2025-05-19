@@ -9,10 +9,12 @@ import Foundation
 
 enum NavigationTarget: Identifiable, Hashable {
     case breath(CGFloat, CGFloat, CGFloat, CGFloat)
+    case support
 
     var id: String {
         switch self {
         case let .breath(inhale, inhaleHold, exhale, exhaleHold): return "breath_\(inhale)_\(inhaleHold)_\(exhale)_\(exhaleHold)"
+        case .support: return "support"
         }
     }
 }

@@ -70,6 +70,9 @@
     "Breathe to reduce" : {
 
     },
+    "Built with simplicity and accessibility at its core, Prana features a calming user interface, intuitive navigation, and voice or visual cues that make breathing routines easy to follow—no matter the user’s age or tech familiarity. Whether someone needs a quick stress reset or a daily wellness ritual, Prana adapts to their pace." : {
+
+    },
     "Cancel" : {
       "localizations" : {
         "hi" : {
@@ -110,6 +113,9 @@
         }
       }
     },
+    "Each element, from the color palette to the flow of exercises, was designed with empathy and intention. Prana isn’t just an app—it’s a companion in wellness, created to bring peace of mind, one breath at a time." : {
+
+    },
     "Equal Breathing" : {
       "localizations" : {
         "hi" : {
@@ -147,6 +153,9 @@
     "Let's Start" : {
 
     },
+    "Prana is a thoughtfully designed iOS app that guides adults and senior citizens through gentle, effective breathing exercises to support mental clarity, relaxation, and overall well-being." : {
+
+    },
     "Save" : {
       "localizations" : {
         "hi" : {
@@ -156,6 +165,9 @@
           }
         }
       }
+    },
+    "Support" : {
+
     },
     "Test your breath-holding capacity" : {
       "localizations" : {

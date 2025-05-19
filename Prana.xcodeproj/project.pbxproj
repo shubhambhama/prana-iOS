@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A8BF06402DDAEBF8007E0F1C /* BreathSettingsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF063F2DDAEBF8007E0F1C /* BreathSettingsProvider.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		A8638E142DD5029B00EB3EB4 /* Prana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prana.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8BF063F2DDAEBF8007E0F1C /* BreathSettingsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreathSettingsProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -45,6 +50,7 @@
 		A8638E0B2DD5029B00EB3EB4 = {
 			isa = PBXGroup;
 			children = (
+				A8BF063F2DDAEBF8007E0F1C /* BreathSettingsProvider.swift */,
 				A8638E162DD5029B00EB3EB4 /* Prana */,
 				A8638E152DD5029B00EB3EB4 /* Products */,
 			);
@@ -135,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8BF06402DDAEBF8007E0F1C /* BreathSettingsProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

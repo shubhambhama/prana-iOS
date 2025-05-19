@@ -34,8 +34,6 @@ struct TypeWriterView: View {
             .font(.title)
             .fontWeight(.bold)
             .foregroundColor(.white)
-            .padding(.horizontal, 16)
-            .padding(.top, 56)
     }
 }
 

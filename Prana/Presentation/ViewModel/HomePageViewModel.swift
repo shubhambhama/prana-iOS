@@ -22,6 +22,7 @@ final class HomePageViewModel: HomePageViewModelProtocol {
     
     let apiKey = "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"
     
+//    let apiKey = ""
     
     let systemPrompt = "You are an assistant who has deep knowledge about meditation and breathing techiniques. "
     let homepageQuotePrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. Give me one quote for today to do use these breathing techiniques to reduce stress and anxiety. Make sure this is maximum 21 words long. Also, make sure to add try this breathing technique to reduce stress and anxiety."

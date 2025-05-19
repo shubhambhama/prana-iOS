@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ChangeDurationView: View {
+    @StateObject private var viewModel = HomePageViewModel()
+    @State var cardType: HomeCardType
     @State var progress = 1.0
     @Environment(\.dismiss) var dismiss
     
@@ -138,5 +140,5 @@ struct ChangeDurationCircleProgress: View {
 
 
 #Preview {
-    ChangeDurationView()
+//    ChangeDurationView()
 }

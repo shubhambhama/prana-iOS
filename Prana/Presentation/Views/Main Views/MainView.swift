@@ -17,11 +17,33 @@ struct MainView: View {
                 ZStack {
                     HomePageBackgroundView()
                     VStack(alignment: .leading) {
-                        TypeWriterView(fullText: "Hello", typingSpeed: 0.1)
+                        HStack {
+                            TypeWriterView(fullText: "Hello", typingSpeed: 0.1)
+                            Spacer()
+                            Button {
+                                selectedTarget = .support
+                            } label: {
+                                Image(systemName: "suit.heart")
+                                    .font(.title2)
+                                    .foregroundColor(.white)
+                                    .frame(width: 42, height: 42)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 10 ,style: .continuous)
+                                            .fill(.ultraThinMaterial)
+                                    }
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top , 24)
+
                         Text(viewModel.homePageLabel)
                             .foregroundColor(.white)
-                            .padding(.horizontal, 16)
-                        Spacer()
+                            .padding(.horizontal, 20)
+                            .padding(.top, 8)
+                            .padding(.bottom, 16)
+                        
+//                        Spacer()
+                        
                         HomePageCards(listOfCards: viewModel.homePageData, onCardTap: { inhale, inhaleHold, exhale, exhaleHold in
                             selectedTarget = .breath(inhale, inhaleHold, exhale, exhaleHold)
                         })
@@ -38,3 +60,6 @@ struct MainView: View {
     }
 }
 
+#Preview {
+    RootView()
+}
