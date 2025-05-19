@@ -8,14 +8,25 @@
 import SwiftUI
 
 struct BreathePractiseView: View {
-    @State var currentType: BreatheTypeModel = SampleType[0]
-    @Namespace var animation
-    @State var showBreatheView: Bool = false
-    @State var startAnimation: Bool = false
+    @State var inhaleDuration: CGFloat = 4.0
+    @State var inhaleHoldDuration: CGFloat = 0.0
+    @State var exhaleDuration: CGFloat = 10.0
+    @State var exhaleHoldDuration: CGFloat = 0.0
     
-    @State var timerCount: CGFloat = 0
-    @State var breatheAction: String = "Breathe In"
-    @State var count: Int = 0
+    @State var totalCycles: Int = 2
+    
+    @State private var currentDuration: CGFloat = 0.0
+    
+    @State private var currentType: BreatheTypeModel = SampleType[0]
+    @Namespace private var animation
+    @State private var showBreatheView: Bool = false
+    @State private var startAnimation: Bool = false
+    @State private var timerCount: CGFloat = 0
+    @State private var breatheAction: String = "Breathe In"
+    @State private var count: Int = 0
+    @State private var currentPhase: BreathingPhase = .inhale
+    @State private var currentCycle: Int = 0
+    
     
     var body: some View {
         ZStack {
@@ -33,51 +44,69 @@ struct BreathePractiseView: View {
                 .animation(.easeInOut(duration: 1), value: showBreatheView)
         }
         .onReceive(Timer.publish(every: 0.01, on: .main, in: .common).autoconnect()) { _ in
-            if showBreatheView {
-                if timerCount >=  3.2 {
-                    timerCount = 0
-                    breatheAction = (breatheAction == "Breathe Out" ? "Breathe In" : "Breathe Out")
-                    withAnimation(.easeInOut(duration: 3).delay(0.01)) {
-                        startAnimation.toggle()
+            guard showBreatheView else {
+                timerCount = 0
+                return
+            }
+            
+            if timerCount >= currentDuration {
+                switch currentPhase {
+                case .inhale:
+                    currentPhase = .holdInhale
+                    currentDuration = inhaleHoldDuration
+                    breatheAction = "Hold"
+                    // Don't animate here
+                case .holdInhale:
+                    currentPhase = .exhale
+                    currentDuration = exhaleDuration
+                    breatheAction = "Breathe Out"
+                    withAnimation(.easeInOut(duration: Double(currentDuration))) {
+                        startAnimation.toggle() // Expand
                     }
-                    
-                    UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
-                } else {
-                    timerCount += 0.01
+                case .exhale:
+                    currentPhase = .holdExhale
+                    currentDuration = exhaleHoldDuration
+                    breatheAction = "Hold"
+                    // Don't animate here
+                case .holdExhale:
+                    currentCycle += 1
+                    if currentCycle >= totalCycles {
+                        stopBreathing()
+                        return
+                    }
+                    currentPhase = .inhale
+                    currentDuration = inhaleDuration
+                    breatheAction = "Breathe In"
+                    withAnimation(.easeInOut(duration: Double(currentDuration))) {
+                        startAnimation.toggle() // Shrink
+                    }
                 }
                 
-                count = 3 - Int(timerCount)
-            } else {
                 timerCount = 0
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                
+            } else {
+                timerCount += 0.01
             }
+            
+            count = max(0, Int(ceil(currentDuration - timerCount)))
         }
+        
+        
+        
     }
     
     @ViewBuilder
     func Content() -> some View {
         VStack {
-            HStack {
-                Text("Breathe")
-                    .font(.largeTitle )
-                    .fontWeight(.semibold)
-                    .foregroundStyle(.white)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Button {
-                    
-                } label: {
-                    Image(systemName: "suit.heart")
-                        .font(.title2)
-                        .foregroundStyle(.white)
-                        .frame(width: 42, height: 42)
-                        .background {
-                            RoundedRectangle(cornerRadius: 10, style: .continuous).fill(.ultraThinMaterial)
-                        }
-                }
-                
-            }
-            .padding()
-            .opacity(showBreatheView ? 0 : 1)
+            Text("Breathe")
+                .font(.largeTitle )
+                .fontWeight(.semibold)
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .opacity(showBreatheView ? 0 : 1)
+            
             
             GeometryReader { proxy in
                 let size = proxy.size
@@ -91,14 +120,13 @@ struct BreathePractiseView: View {
                         .opacity(showBreatheView ? 0 : 1)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12 ) {
+                        HStack(spacing: 12) {
                             ForEach(SampleType) { type in
                                 Text(type.title)
                                     .foregroundColor(currentType.id == type.id ? .black : .white )
                                     .padding(.vertical, 10)
                                     .padding(.horizontal, 15)
                                     .background {
-                                        // MARK: Testing
                                         ZStack {
                                             if currentType.id == type.id{
                                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -123,110 +151,126 @@ struct BreathePractiseView: View {
                     }
                     .opacity(showBreatheView ? 0 : 1)
                     
-                    Button(action: startBreathing){
-                        Text(showBreatheView ? "Finish Breathing" : "Let's Start")
-                            .fontWeight(.semibold)
-                            .foregroundColor(showBreatheView ? .white.opacity(0.75) : .black)
-                            .padding(.vertical, 15)
-                            .frame(maxWidth: .infinity)
-                            .background {
-                                if showBreatheView {
-                                    RoundedRectangle(cornerRadius: 10,  style: .continuous)
-                                        .stroke(.white.opacity(0.5))
-                                } else {
-                                    RoundedRectangle(cornerRadius: 10,  style: .continuous)
-                                        .fill(currentType.color.gradient)
-                                }
+                    Button(action: {
+                        if showBreatheView {
+                                stopBreathing()
+                            } else {
+                                startBreathing()
                             }
-                    }
-                    .padding()
-                    
+                    }) {
+                    Text(showBreatheView ? "Finish Breathing" : "Let's Start")
+                        .fontWeight(.semibold)
+                        .foregroundColor(showBreatheView ? .white.opacity(0.75) : .black)
+                        .padding(.vertical, 15)
+                        .frame(maxWidth: .infinity)
+                        .background {
+                            if showBreatheView {
+                                RoundedRectangle(cornerRadius: 10,  style: .continuous)
+                                    .stroke(.white.opacity(0.5))
+                            } else {
+                                RoundedRectangle(cornerRadius: 10,  style: .continuous)
+                                    .fill(currentType.color.gradient)
+                            }
+                        }
                 }
-                .frame(width: size.width, height: size.height, alignment: .bottom)
+                .padding()
+                
             }
+            .frame(width: size.width, height: size.height, alignment: .bottom)
         }
-        .frame(maxHeight: .infinity, alignment: .top)
     }
-    
-    @ViewBuilder
-    func BreatheView(size: CGSize) -> some View {
-        ZStack {
-            ForEach(1...8, id: \.self) { index in
-                Circle()
-                    .fill(currentType.color.gradient.opacity(0.5))
-                    .frame(width: 150, height: 150)
-                    .offset(x: startAnimation ? 0 : 75)
-                    .rotationEffect(Angle(degrees: Double(index) * 45))
-                    .rotationEffect(Angle(degrees: startAnimation ? 0 : -45))
-            }
+        .frame(maxHeight: .infinity, alignment: .top)
+}
+
+@ViewBuilder
+func BreatheView(size: CGSize) -> some View {
+    ZStack {
+        ForEach(1...8, id: \.self) { index in
+            Circle()
+                .fill(currentType.color.gradient.opacity(0.5))
+                .frame(width: 150, height: 150)
+                .offset(x: startAnimation ? 0 : 75)
+                .rotationEffect(Angle(degrees: Double(index) * 45))
+                .rotationEffect(Angle(degrees: startAnimation ? 0 : -45))
         }
-        .scaleEffect(startAnimation ? 0.8 : 1)
-        .overlay(content: {
+    }
+    .scaleEffect(startAnimation ? 0.8 : 1)
+    .overlay(content: {
+        if(inhaleHoldDuration != 1000.0) {
             Text("\(count == 0 ? 3 : count)")
                 .font(.title)
                 .fontWeight(.semibold)
                 .foregroundColor(.white)
                 .animation(.easeInOut, value: count)
                 .opacity(showBreatheView ? 1: 0)
-            
-        })
-        .frame(height: (size.width - 40 ))
-    }
-    
-    @ViewBuilder
-    func Background() -> some View {
-        GeometryReader { geo in
-            let size = geo.size
-            Image("breath_bg_portraint")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .offset(y:  -150)
-                .frame(width: size.width, height: size.height)
-                .clipped()
-                .blur(radius: startAnimation ? 4 : 0, opaque: true)
-                .overlay {
-                    ZStack {
-                        Rectangle()
-                            .fill(.linearGradient(colors: [
-                                currentType.color.opacity(0.9),
-                                .clear,
-                                .clear
-                            ], startPoint: .top, endPoint: .bottom))
-                            .frame(height: size.height / 1.5)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                        
-                        Rectangle()
-                            .fill(.linearGradient(colors: [
-                                .clear,
-                                .black,
-                                .black,
-                                .black,
-                                .black
-                            ], startPoint: .top, endPoint: .bottom))
-                            .frame(height: size.height / 1.35)
-                            .frame(maxHeight: .infinity, alignment: .bottom)
-                    }
-                }
-            
-        }
-        .ignoresSafeArea()
-    }
-    
-    func startBreathing() {
-        withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
-            showBreatheView.toggle()
         }
         
-        if showBreatheView {
-            withAnimation(.easeInOut(duration: 3).delay(0.05)) {
-                startAnimation = true
+    })
+    .frame(height: (size.width - 40))
+}
+
+@ViewBuilder
+func Background() -> some View {
+    GeometryReader { geo in
+        let size = geo.size
+        Image("breath_bg_portraint")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .offset(y:  -100)
+            .frame(width: size.width, height: size.height)
+            .clipped()
+            .blur(radius: startAnimation ? 6 : 0, opaque: true)
+            .overlay {
+                ZStack {
+                    Rectangle()
+                        .fill(.linearGradient(colors: [
+                            currentType.color.opacity(0.9),
+                            .clear,
+                            .clear
+                        ], startPoint: .top, endPoint: .bottom))
+                        .frame(height: size.height / 1.5)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                    
+                    Rectangle()
+                        .fill(.linearGradient(colors: [
+                            .clear,
+                            .black.opacity(0.85),
+                            .black.opacity(0.9),
+                            .black,
+                            .black
+                        ], startPoint: .top, endPoint: .bottom))
+                        .frame(height: size.height / 1.35)
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                }
             }
-        } else {
-            withAnimation(.easeInOut(duration: 1.6)) {
-                startAnimation = false
-            }
-        }
+        
     }
+    .ignoresSafeArea()
+}
+
+func startBreathing() {
+    withAnimation(.interactiveSpring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.7)) {
+        showBreatheView = true
+    }
+    
+    currentPhase = .inhale
+    currentDuration = inhaleDuration
+    breatheAction = "Breathe In"
+    currentCycle = 0
+    timerCount = 0
+    
+    withAnimation(.easeInOut(duration: Double(currentDuration)).delay(0.05)) {
+        startAnimation = true
+    }
+}
+
+
+func stopBreathing() {
+    withAnimation(.easeInOut(duration: 1.6)) {
+        showBreatheView = false
+        startAnimation = false
+    }
+}
 }
 
 #Preview {

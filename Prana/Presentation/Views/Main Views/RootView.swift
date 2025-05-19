@@ -16,8 +16,8 @@ struct RootView: View {
             MainView(viewModel: viewModel, selectedTarget: $selectedTarget)
                 .navigationDestination(item: $selectedTarget) { target in
                     switch target {
-                    case .breath:
-                        BreathePractiseView()
+                    case .breath(let inhale, let inhaleHold, let exhale, let exhaleHold):
+                        BreathePractiseView(inhaleDuration: inhale, inhaleHoldDuration: inhaleHold, exhaleDuration: exhale, exhaleHoldDuration: exhaleHold)
                     }
                 }
             

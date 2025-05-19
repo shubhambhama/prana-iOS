@@ -20,7 +20,7 @@ final class HomePageViewModel: HomePageViewModelProtocol {
     @Published var homePageInfo = ""
     @Published var isInfoSheetExpanded: Bool = false
     
-    let apiKey = "sk-proj-<OPEN_AI_KEY>"
+    let apiKey = "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"
     
     
     let systemPrompt = "You are an assistant who has deep knowledge about meditation and breathing techiniques. "
@@ -49,7 +49,8 @@ extension HomePageViewModel {
                 title: NSLocalizedString("Equal Breathing", comment: ""),
                 subtitle: NSLocalizedString("Equal Breathing helps you to relax and focus.", comment: ""),
                 backgroundColor: "#2e5d6c",
-                footerAction:  NSLocalizedString("Change Duration", comment: "")
+                footerAction:  NSLocalizedString("Change Duration", comment: ""),
+                homeCardType: HomeCardType.equalBreathing
             )
         )
         listData.append(
@@ -57,7 +58,8 @@ extension HomePageViewModel {
                 title: NSLocalizedString("Box Breathing", comment: ""),
                 subtitle: NSLocalizedString("Box Breathing is a powerful stress reliever.", comment: ""),
                 backgroundColor: "#1a3950",
-                footerAction:  NSLocalizedString("Change Duration", comment: "")
+                footerAction:  NSLocalizedString("Change Duration", comment: ""),
+                homeCardType: HomeCardType.boxBreathing
             )
         )
         listData.append(
@@ -65,14 +67,16 @@ extension HomePageViewModel {
                 title: NSLocalizedString("4-7-8 Breathing", comment: ""),
                 subtitle: NSLocalizedString("4-7-8 Breathing promotes better sleep", comment: ""),
                 backgroundColor: "#653f5f",
-                footerAction:  NSLocalizedString("Change Duration", comment: "")
+                footerAction:  NSLocalizedString("Change Duration", comment: ""),
+                homeCardType: HomeCardType.fourSevenEightBreathing
             )
         )
         listData.append(
             HomePageCardModel(
                 title: NSLocalizedString("Breath Holding", comment: ""),
                 subtitle: NSLocalizedString("Test your breath-holding capacity", comment: ""),
-                backgroundColor: "#5e3861"
+                backgroundColor: "#5e3861",
+                homeCardType: HomeCardType.breathHolding
             )
         )
         homePageData = listData

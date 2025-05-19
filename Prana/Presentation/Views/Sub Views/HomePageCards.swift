@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomePageCards: View {
     var listOfCards: [HomePageCardModel] = .init()
-    var onCardTap: () -> Void
+    var onCardTap: (CGFloat, CGFloat, CGFloat, CGFloat) -> Void
     
     var body: some View {
         let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -17,10 +17,7 @@ struct HomePageCards: View {
         LazyVGrid(columns: columns, spacing: 12) {
             ForEach(listOfCards, id: \.id) { item in
                 CardView(
-                    title: item.title,
-                    subtitle: item.subtitle,
-                    backgroundColor: item.backgroundColor,
-                    footerAction: item.footerAction,
+                    item: item,
                     onCardTap: onCardTap
                 )
             }
@@ -30,30 +27,27 @@ struct HomePageCards: View {
 }
 
 struct CardView: View {
-    let title: String
-    let subtitle: String
-    let backgroundColor: String
-    let footerAction: String?
-    var onCardTap: () -> Void
+    let item: HomePageCardModel
+    var onCardTap: (CGFloat, CGFloat, CGFloat, CGFloat) -> Void
     
     @State private var isExpanded = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(LocalizedStringKey(title))
+            Text(LocalizedStringKey(item.title))
                 .font(.title)
                 .foregroundStyle(.white)
                 .bold()
                 .lineLimit(3)
                 .minimumScaleFactor(0.8)
             
-            Text(LocalizedStringKey(subtitle))
+            Text(LocalizedStringKey(item.subtitle))
                 .font(.subheadline)
                 .foregroundStyle(.white)
             
             Spacer()
             
-            if let duration = footerAction {
+            if let duration = item.footerAction {
                 Button(action: {
                     isExpanded.toggle()
                 }) {
@@ -73,10 +67,10 @@ struct CardView: View {
         .frame(maxWidth: .infinity)
         .frame(height: 220)
         .padding(16)
-        .background(Color(hex: backgroundColor))
+        .background(Color(hex: item.backgroundColor))
         .cornerRadius(16)
         .onTapGesture {
-            onCardTap()
+            onCardTap(item.homeCardType.parameters.inhale, item.homeCardType.parameters.inhaleHold, item.homeCardType.parameters.exhale, item.homeCardType.parameters.exhaleHold)
         }
         .sheet(isPresented: $isExpanded) {
             ChangeDurationView().presentationDetents([.fraction(0.54)])

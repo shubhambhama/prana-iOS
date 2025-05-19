@@ -14,12 +14,14 @@ struct HomePageCardModel {
     let subtitle: String
     let backgroundColor: String
     let footerAction: String?
+    let homeCardType: HomeCardType
     
-    init(title: String, subtitle: String, backgroundColor: String, footerAction: String? = nil) {
+    init(title: String, subtitle: String, backgroundColor: String, footerAction: String? = nil, homeCardType: HomeCardType) {
         self.id = UUID()
         self.title = title
         self.subtitle = subtitle
         self.backgroundColor = backgroundColor
         self.footerAction = footerAction
+        self.homeCardType = homeCardType
     }
 }
