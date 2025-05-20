@@ -41,9 +41,7 @@ struct MainView: View {
                             .padding(.horizontal, 20)
                             .padding(.top, 8)
                             .padding(.bottom, 16)
-                        
-//                        Spacer()
-                        
+                                                
                         HomePageCards(listOfCards: viewModel.homePageData, onCardTap: { inhale, inhaleHold, exhale, exhaleHold in
                             selectedTarget = .breath(inhale, inhaleHold, exhale, exhaleHold)
                         })

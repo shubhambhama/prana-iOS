@@ -16,8 +16,8 @@ struct ChangeDurationView: View {
     
     var body: some View {
         ZStack {
-            Color(hue: 0.58, saturation: 0.06, brightness: 1.0)
-                .edgesIgnoringSafeArea(.all)
+//            Color(hue: 0.58, saturation: 0.06, brightness: 1.0)
+//                .edgesIgnoringSafeArea(.all)
             
             VStack {
                 Text("Breath Cycles")

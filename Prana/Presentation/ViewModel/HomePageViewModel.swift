@@ -20,6 +20,7 @@ final class HomePageViewModel: HomePageViewModelProtocol {
     @Published var homePageInfo = ""
     @Published var isInfoSheetExpanded: Bool = false
     
+    // MARK: This key is for testing purpose
     let apiKey = "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"
     
 //    let apiKey = ""
@@ -28,7 +29,7 @@ final class HomePageViewModel: HomePageViewModelProtocol {
     let homepageQuotePrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. Give me one quote for today to do use these breathing techiniques to reduce stress and anxiety. Make sure this is maximum 21 words long. Also, make sure to add try this breathing technique to reduce stress and anxiety."
     
     // MARK: This query has multiple parameters for different breathing techniques. Retrieve them from UserDefaults once the logic is implemented.
-    let homepageInfoPrompt = "I have breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. In that, I have completed seven equal breathing, eight box breathing, two 4-7-8 breathing and 24 breath holding. Can you give me insight like how this is improving my health and motivate me to do more. Make sure this is maximum 100 words long."
+    let homepageInfoPrompt = "I have a breathing application which has different types of techiniques like equal breathing, box breathing, 4-7-8 breathing and Breath holding. In that, I have completed seven equal breathing, eight box breathing, two 4-7-8 breathing and 24 breath holding. Give me insight like how this is improving my health with total breathing practise I did and motivate me to do more. Make sure this is maximum 100 words long and do not use markdown just sentence description"
     
     init() {
         getHomePageData()
@@ -85,6 +86,7 @@ extension HomePageViewModel {
         
     }
     
+    // MARK: Once MVVM will integrate, will move this to repository or data manager
     func fetchDataFromOpenAI(userPrompt: String, updateLabel: @escaping (String) -> Void) {
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
@@ -120,7 +122,6 @@ extension HomePageViewModel {
                     DispatchQueue.main.async {
                         content = content.replacingOccurrences(of: "\"", with: "").replacingOccurrences(of: "\n", with: "")
                         updateLabel(content)
-//                        outputLabel = content
                     }
                 }
             }

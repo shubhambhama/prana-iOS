@@ -65,13 +65,34 @@
       }
     },
     "Breathe" : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "साँस"
+          }
+        }
+      }
     },
     "Breathe to reduce" : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "कम करने के लिए सांस लें"
+          }
+        }
+      }
     },
     "Built with simplicity and accessibility at its core, Prana features a calming user interface, intuitive navigation, and voice or visual cues that make breathing routines easy to follow—no matter the user’s age or tech familiarity. Whether someone needs a quick stress reset or a daily wellness ritual, Prana adapts to their pace." : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सरलता और सुगमता के साथ निर्मित, प्राण में एक शांत उपयोगकर्ता इंटरफ़ेस, सहज नेविगेशन और आवाज़ या दृश्य संकेत हैं जो श्वास संबंधी दिनचर्या का पालन करना आसान बनाते हैं - चाहे उपयोगकर्ता की उम्र या तकनीक से परिचित कोई भी हो। चाहे किसी को त्वरित तनाव रीसेट या दैनिक कल्याण अनुष्ठान की आवश्यकता हो, प्राण उनकी गति के अनुसार ढल जाता है।"
+          }
+        }
+      }
     },
     "Cancel" : {
       "localizations" : {
@@ -114,7 +135,14 @@
       }
     },
     "Each element, from the color palette to the flow of exercises, was designed with empathy and intention. Prana isn’t just an app—it’s a companion in wellness, created to bring peace of mind, one breath at a time." : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "रंग पैलेट से लेकर व्यायाम के प्रवाह तक, प्रत्येक तत्व को सहानुभूति और इरादे के साथ डिज़ाइन किया गया था। प्राण केवल एक ऐप नहीं है - यह स्वास्थ्य का साथी है, जिसे एक बार में एक सांस लेकर मन की शांति लाने के लिए बनाया गया है।"
+          }
+        }
+      }
     },
     "Equal Breathing" : {
       "localizations" : {
@@ -137,7 +165,14 @@
       }
     },
     "Finish Breathing" : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "साँस लेना समाप्त करें"
+          }
+        }
+      }
     },
     "Hello" : {
       "extractionState" : "manual",
@@ -151,10 +186,24 @@
       }
     },
     "Let's Start" : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "शुरू करो"
+          }
+        }
+      }
     },
     "Prana is a thoughtfully designed iOS app that guides adults and senior citizens through gentle, effective breathing exercises to support mental clarity, relaxation, and overall well-being." : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "प्राण एक सोच-समझकर बनाया गया आईओएस ऐप है, जो वयस्कों और वरिष्ठ नागरिकों को मानसिक स्पष्टता, विश्राम और समग्र कल्याण के लिए कोमल, प्रभावी श्वास अभ्यास के माध्यम से मार्गदर्शन करता है।"
+          }
+        }
+      }
     },
     "Save" : {
       "localizations" : {
@@ -167,7 +216,14 @@
       }
     },
     "Support" : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "सहायता"
+          }
+        }
+      }
     },
     "Test your breath-holding capacity" : {
       "localizations" : {
@@ -180,7 +236,14 @@
       }
     },
     "Your Breathing Journey So Far" : {
-
+      "localizations" : {
+        "hi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "आपकी अब तक की सांस यात्रा"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

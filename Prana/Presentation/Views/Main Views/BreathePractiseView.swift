@@ -204,7 +204,7 @@ struct BreathePractiseView: View {
                     .foregroundColor(.white)
                     .animation(.easeInOut, value: count)
                     .opacity(showBreatheView ? 1: 0)
-            } else {
+            } else if startAnimation {
                 Text(timeString(from: elapsedSeconds))
                     .font(.title)
                     .fontWeight(.semibold)
